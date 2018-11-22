@@ -2,6 +2,7 @@ const express = require('express');
 const tmp = require('./template')
 
 //init
+var oracle = require('./server/service/oracle.js')
 const app = express();
 const port = 80;
 
@@ -12,3 +13,8 @@ app.get('/', function (req, res) {
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
+// example. REMOVE LATER
+result = oracle.runSql('select table_name from user_tables');
+result.then(function(r){
+    console.log(r);
+})
