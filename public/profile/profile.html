@@ -1,1 +1,29 @@
-<h1>PROFILE</h1>
+<form action="/profile" method="POST">
+    <label for="user">Name:</label>
+    <input type="text" name="firstname" id="">
+    <label for="lastname">Last Name</label>
+    <input type="text" name="lastname" id="">
+    <br>
+    <label for="address">Address</label>
+    <input type="text" name="address" id="">
+    <label for="phone">Phone number</label>
+    <input type="text" name="phone" id="">
+    <label for="email">Email:</label>
+    <input type="text" name="email">
+    <br>
+    <label for="birth">Date Of Birth</label>
+    <input name="birth" type="date" min="1900-01-01" max="2005-01-01" step="1">
+    <br>
+    <label for="sex">Gender</label><br>
+    <input type="radio" name="sex" value="M"> Male <br>
+    <input type="radio" name="sex" value="F"> Female <br>
+    <input type="radio" name="sex" value="O"> Other <br>
+    <br>
+    <label for="role">Role</label>
+    <input type="text" name="role">
+    <br>
+    <label for="managerid">ManagerID:</label>
+    <input type="text" name='managerid'>
+    <br>
+    <button type="submit">Add Employee</button>
+</form>
