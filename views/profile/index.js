@@ -11,6 +11,11 @@ router.use(bodyParser.urlencoded({
 // router.use(express.json());
 // router.use(express.urlencoded());
 
+router.get('/profile', function(req, res) {
+    res.sendFile( 'profile.html', { root: __dirname })
+});
+
+
 router.post('/profile', function(req, res) {
     result = oracle.runSql('select * from login');
     result.then(function(r){
