@@ -10,6 +10,6 @@ app.use(require('./views'));
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 // example. REMOVE LATER
 result = oracle.runSql('select table_name from user_tables');
-result.then(function(r){
+result.then(function (r) {
     console.log(r);
 });
