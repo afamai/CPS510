@@ -1,5 +1,5 @@
 var oracledb = require('oracledb');
-var config = require('../../config/dbconfig');
+var config = require('../config/dbconfig');
 
 // modeule.exports allow function to be used in other files
 module.exports = {
