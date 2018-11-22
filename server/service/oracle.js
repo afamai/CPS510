@@ -1,4 +1,5 @@
 var oracledb = require('oracledb');
+var config = require('../../config/dbconfig');
 
 // modeule.exports allow function to be used in other files
 module.exports = {
@@ -7,9 +8,9 @@ module.exports = {
         try {
             // init connection
             connection = await oracledb.getConnection(  {
-                user          : "oracle_dba",
-                password      : "password",
-                connectString : "192.168.56.102:1521/orcl"
+                user          : config.user,
+                password      : config.pass,
+                connectString : config.connectionStr
             });
             
             // execute sql
