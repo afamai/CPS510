@@ -1,0 +1,14 @@
+{
+  "name": "shoppersdm-pos",
+  "version": "1.0.0",
+  "description": "Point of Sale System for Shoppers Drug Mart",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
