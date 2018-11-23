@@ -1,7 +1,6 @@
 var oracle = require('./oracle.js');
 var util = require('util');
 module.exports = {
-<<<<<<< HEAD
     addContact: async function (address, phone, email, callback) {
         // create sql
         var sql = util.format("INSERT INTO contact (id, address, phone, email) VALUES (contact_id_seq.nextval, '%s', '%s', '%s')", address, phone, email);
@@ -21,27 +20,5 @@ module.exports = {
                 })
             })
         });
-<<<<<<< Updated upstream
-=======
-    insertContact: async function (contactModel) {
-        oracle.open().then(function (c) {
-            var sql = `INSERT INTO contact (id, address, phone, email) VALUES (contact_id_seq.nextval, '${contactModel.address}', '${contactModel.phone}', '${contactModel.email}; commit;')`
-            var query = oracle.runSql(sql, c);
-                console.log(sql);
-                
-            query.then(function () {
-                console.log(query);
-                oracle.close(c);
-            })
-        });
-    },
-
-    model() {
-        address,
-        phone,
-        email
->>>>>>> 1099510868a5b79e76b038de6a8e196da9ed582f
-=======
->>>>>>> Stashed changes
     }
 }
