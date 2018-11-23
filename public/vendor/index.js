@@ -11,6 +11,10 @@ router.use(bodyParser.urlencoded({
 // router.use(express.json());
 // router.use(express.urlencoded());
 
+router.get('/vendor/add', function(req, res) {
+    res.sendFile( 'addVendor.html', { root: __dirname })
+});
+
 router.get('/vendor', function(req, res) {
     res.sendFile( 'vendor.html', { root: __dirname })
 });
@@ -21,7 +25,7 @@ router.post('/vendor/add', function(req, res) {
         console.log("Vendor Added");
         // res.write("Vendor Added");
         // res.end();
-        res.redirect('/employees');
+        res.redirect('/item');
     })
 });
 

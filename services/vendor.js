@@ -11,5 +11,15 @@ module.exports = {
             oracle.runSql(sql, conn);
             callback();
         });
+    },
+
+    getVendors: async function(callback){
+        oracle.open().then(function(c){ 
+            var query = oracle.runSql("SELECT id, companyname, contactid FROM vendor", c);
+            query.then(function(result){
+                callback(result);
+                oracle.close(c);
+            })
+        });
     }
 }
