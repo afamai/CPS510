@@ -17,8 +17,15 @@
                     <th scope="col">First</th>
                     <th scope="col">Last</th> 
                     <th scope="col">Position</th>
-                    <th scope="col">Manager</th>
                 </thead>
+                {{#employees}}
+                <tr>
+                    <td>{{ID}}</td>
+                    <td>{{FIRSTNAME}}</td>
+                    <td>{{LASTNAME}}</td>
+                    <td>{{ROLE}}</td>
+                </tr>
+                {{/employees}}
             </table>
         </div>
         <div id="addEmployee" class="modal" tabindex="-1" role="dialog">

@@ -1,13 +1,18 @@
 var express = require('express');
+var mustache = require('mustache');
+var fs = require('fs');
 var db = require('../../services/employees');
 var router = express.Router();
 
 router.get('/employees', function(req, res) {
+    let view;
     db.getEmployees(function(result){
-        console.log(result);
-
+        view = { employees: result.rows }
+        console.log(view);
+        var html = fs.readFileSync("./public/employees/employees.html", 'utf8');
+        var output = mustache.render(html, view);
+        res.send(output);
     });
-    res.sendFile('employees.html', {root: __dirname});
 });
 
 router.post('/employees/add/', function(req, res){

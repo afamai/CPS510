@@ -4,7 +4,7 @@ var util = require('util');
 module.exports = {
     getEmployees: async function(callback){
         oracle.open().then(function(c){ 
-            var query = oracle.runSql("select * from contact", c);
+            var query = oracle.runSql("select id, firstname, lastname, role from employee", c);
             query.then(function(result){
                 callback(result);
                 oracle.close(c);
