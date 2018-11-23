@@ -16,7 +16,7 @@ router.get('/item', function(req, res) {
 });
 
 
-router.post('/item', function(req, res) {
+router.post('/item/add', function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     var itemQuery =
         'INSERT INTO item (id, name, vendorid, price, quantity) VALUES (' +
