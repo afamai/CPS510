@@ -18,8 +18,8 @@ router.get('/employees', function(req, res) {
 router.post('/employees/add/', function(req, res){
     db.addEmployee(req.body, function(){
         console.log("Employee Added");
+        res.redirect('/employees');
     });
-    res.send('hello');
 });
 
 module.exports = router
