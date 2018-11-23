@@ -21,6 +21,7 @@ module.exports = {
                 })
             })
         });
+<<<<<<< Updated upstream
 =======
     insertContact: async function (contactModel) {
         oracle.open().then(function (c) {
@@ -40,5 +41,7 @@ module.exports = {
         phone,
         email
 >>>>>>> 1099510868a5b79e76b038de6a8e196da9ed582f
+=======
+>>>>>>> Stashed changes
     }
 }
