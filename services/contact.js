@@ -41,5 +41,4 @@ module.exports = {
         email
 >>>>>>> 1099510868a5b79e76b038de6a8e196da9ed582f
     }
-
 }
