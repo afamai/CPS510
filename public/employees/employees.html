@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="/employees/employees.js"></script>
+        <title>Employees Management</title>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Employees</h2>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmployee">Add Employee</button>
+            <table class="table">
+                <thead>
+                    <th scope="col">ID</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th> 
+                    <th scope="col">Position</th>
+                    <th scope="col">Manager</th>
+                </thead>
+            </table>
+        </div>
+        <div id="addEmployee" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id='employeeForm' action="/employees/add" method="POST">
+                            <input type="text" name="firstname" placeholder="First Name">
+                            <br>
+                            <input type="text" name="lastname" placeholder="Last Name">
+                            <br>
+                            <label for="address">Address</label>
+                            <input type="text" name="address" id="">
+                            <br>
+                            <label for="phone">Phone number</label>
+                            <input type="text" name="phone" id="">
+                            <br>
+                            <label for="email">Email:</label>
+                            <input type="text" name="email">
+                            <br>
+                            <label for="birth">Date Of Birth</label>
+                            <input name="birth" type="date" min="1900-01-01" max="2005-01-01" step="1">
+                            <br>
+                            <label for="sex">Gender</label><br>
+                            <input type="radio" name="sex" value="M"> Male <br>
+                            <input type="radio" name="sex" value="F"> Female <br>
+                            <input type="radio" name="sex" value="O"> Other <br>
+                            <br>
+                            <label for="role">Role</label>
+                            <input type="text" name="role">
+                            <br>
+                            <label for="managerid">ManagerID:</label>
+                            <input type="text" name='managerid'>
+                            <br>
+                            <input type="password" name="password" placeholder="password"></input>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="addEmployee()">Add</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
