@@ -1,5 +1,5 @@
-$('#employee').on('click', function(){
-    console.log("HGello world");
+$(document).ready(function(){
+    $('#employee').on('click', function(){
+        window.location = "/employees"
+    });
 });
-
-console.log($('#employee').html);
