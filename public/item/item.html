@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -7,30 +8,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="/item/item.js"></script>
-    <title>New Item</title>
+    <title>View Items</title>
 </head>
 
 <body>
-    <form action="/item/add" method="POST">
-        <label for="name">Item name:</label>
-        <input type="text" name="itemname" id="">
-        <br>
-        <label for="itemprice">Item price:</label>
-        <input type="text" name="itemprice" id="">
-        <br>
-        <label for="itemqty">Item quantity:</label>
-        <input type="text" name="itemqty" id="">
-        <br>
-        <label for="vendor">Vendor:</label>
-        <select name="vendor" id="vendor">
-            <option disabled selected value> -- select an option -- </option>
-            <option value="a">a</option>
-            <option value="b">b</option>
-            <option value="new">Add New Vendor</option>
-        </select>
-        <br>
-        <button type="submit">Add Item</button>
-    </form>
+    <h1>VIEW / EDIT ITEMS HERE</h1>
+    <button id="addNewItem">Add New Item</button>
 </body>
 
 </html>

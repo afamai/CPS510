@@ -5,4 +5,8 @@ $(document).ready(function(){
             window.location = "/vendor/add";
         }
     });
+
+    $("#addNewItem").click(function(){
+        window.location = "/item/add";
+    });
 });
