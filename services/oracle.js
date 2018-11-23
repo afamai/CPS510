@@ -1,6 +1,8 @@
 var oracledb = require('oracledb');
 var config = require('../config/dbconfig');
 
+oracledb.autoCommit = true;
+
 //modeule.exports allow function to be used in other files
 module.exports = {
     open: async function(){
