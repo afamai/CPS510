@@ -20,7 +20,11 @@ module.exports = {
     runSql: async function(sql, connection) {
         try {
             // execute sql
-            result = await connection.execute(sql);
+            bind = {};
+            options = {
+                outFormat: oracledb.OBJECT
+            }
+            result = await connection.execute(sql, bind, options);
         } catch (err) {
             console.error(err);
         }
