@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <title>Inventory</title>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/">Back</a>
+        <h2>Inventory</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addItem">New Item</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmployee">New Order</button>
+        <table class="table">
+            <thead>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Vendor</th>
+                <th scope="col">Price($)</th>
+                <th scope="col">Quantity</th>
+                <th>Action</th>
+            </thead>
+            {{#items}}
+            <tr>
+                <td>{{ID}}</td>
+                <td>{{NAME}}</td>
+                <td>{{COMPANYNAME}}</td>
+                <td>{{PRICE}}</td>
+                <td>{{QUANTITY}}</td>
+                <td><a href='/item/{{ID}}'>Edit</a></td>
+                {{/items}}
+        </table>
+    </div>
+    <div id="addItem" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="itemForm" action="/item/add" method="POST">
+                        <table>
+                            <tr>
+                                <td><label for="name">Item name</label></td>
+                                <td><input type="text" name="name"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="price">Item price</label></td>
+                                <td><input type="text" name="price"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="vendor">Vendor</label>
+                                <td>
+                                    <select name="vendor">
+                                        <option value="" selected disabled hidden>-- Select a vendor --</option>
+                                        {{#vendors}}
+                                        <option value={{ID}} {{#sel}} selected{{/sel}}>{{COMPANYNAME}} </option>
+                                            {{/vendors}} </select> </td> </tr> </table> </form> </div> <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" onclick="$('#itemForm').submit();">Add</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
