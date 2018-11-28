@@ -1,12 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>View Vendors</title>
-</head>
-<body>
-    <h1>This page displays vendors or something</h1>
-</body>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="/employees/employees.js"></script>
+        <title>Vendors</title>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Vendors</h2>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmployee">Add Vendor</button>
+            <table class="table">
+                <thead>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th> 
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Action</th>
+                </thead>
+                {{#vendor}}
+                <tr>
+                    <td>{{ID}}</td>
+                    <td>{{COMPANYNAME}}</td>
+                    <td>{{ADDRESS}}</td>
+                    <td>{{PHONE}}</td>
+                    <td>{{EMAIL}}</td>
+                    <td><a>Edit</a></td>
+                </tr>
+                {{/vendor}}
+            </table>
+        </div>
+        <div id="addEmployee" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Vendor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="vendorForm" action="/vendor/add" method="POST">
+                            <table>
+                                <tr>
+                                    <td><label for="companyname">Company Name</label></td>
+                                    <td><input type="text" name="companyname"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="address">Address</label></td>
+                                    <td><input type="text" name="address"></td>
+                                <tr>
+                                    <td><label for="phone">Phone</label></td>
+                                    <td><input type="text" name="phone"></td>
+                                <tr>
+                                    <td><label for="email">Email</label></td>
+                                    <td><input type="text" name="email"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="$('#vendorForm').submit()">Add</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

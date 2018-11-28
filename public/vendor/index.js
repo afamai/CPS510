@@ -1,4 +1,6 @@
 var express = require('express');
+var fs = require('fs');
+var mustache = require('mustache');
 var router = express.Router();
 var db = require('../../services/vendor')
 
@@ -10,22 +12,20 @@ router.use(bodyParser.urlencoded({
 }));
 // router.use(express.json());
 // router.use(express.urlencoded());
-
-router.get('/vendor/add', function(req, res) {
-    res.sendFile( 'addVendor.html', { root: __dirname })
-});
-
 router.get('/vendor', function(req, res) {
-    res.sendFile( 'vendor.html', { root: __dirname })
+    let view;
+    db.getVendors(function(result){
+        view = { vendor: result.rows }
+        var html = fs.readFileSync("./public/vendor/vendor.html", 'utf8');
+        var output = mustache.render(html, view);
+        res.send(output);
+    });
 });
 
 
 router.post('/vendor/add', function(req, res) {
     db.addVendor(req.body, function () {
-        console.log("Vendor Added");
-        // res.write("Vendor Added");
-        // res.end();
-        res.redirect('/item');
+        res.redirect('/vendor');
     })
 });
 
