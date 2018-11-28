@@ -8,17 +8,17 @@ var router = express.Router();
 var contact = require('../../services/employees')
 
 router.get('/profile/:id', function (req, res) {
-    db.getProfile(req.params.id, function(employee, contact){
+    db.getProfile(req.params.id, function(employee){
         var view = {
             id: req.params.id,
-            contactid: contact.ID,
+            contactid: employee.CONTACTID,
             firstname: employee.FIRSTNAME,
             lastname: employee.LASTNAME,
             birth: dateFormat(employee.DATEOFBIRTH, "yyyy-mm-dd"),
             position: employee.ROLE,
-            address: contact.ADDRESS,
-            phone: contact.PHONE,
-            email: contact.EMAIL,
+            address: employee.ADDRESS,
+            phone: employee.PHONE,
+            email: employee.EMAIL,
             managerid: employee.MANAGERID,
             gender: employee.SEX,
             isMale: function() {

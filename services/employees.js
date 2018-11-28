@@ -57,14 +57,12 @@ VALUES (employee_id_seq.nextval, '%s', '%s', TO_DATE('%s', 'YYYY-MM-DD'), '%s', 
     },
     getProfile: async function(emplyoeeId, callback){
         //create sql
-        var sql = "SELECT * FROM employee WHERE id=" + emplyoeeId;
+        var sql = "select * FROM employee e, contact c WHERE e.contactid = c.id and e.id=" + emplyoeeId;
         oracle.open().then(function(conn){
             var query = oracle.runSql(sql, conn);
-            query.then(function(employee){   
-                query = oracle.runSql("SELECT * FROM contact WHERE id=" + employee.rows[0].CONTACTID, conn);
-                query.then(function(contact){
-                    callback(employee.rows[0], contact.rows[0]);
-                });
+            query.then(function(employee){
+                oracle.close(conn);
+                callback(employee.rows[0]);
             });
         });
     }
