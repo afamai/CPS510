@@ -20,5 +20,12 @@ module.exports = {
                 })
             })
         });
+    }, 
+    updateContact: async function(id, address, phone, email, conn, callback){
+        var sql = util.format("UPDATE contact SET address='%s', phone='%s', email='%s' WHERE id=%d", address, phone, email, id);
+        var query = oracle.runSql(sql, conn);
+        query.then(function (result) {
+            callback();
+        });
     }
 }
