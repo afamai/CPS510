@@ -40,7 +40,6 @@ module.exports = {
             } catch (err) {
                 console.error(err);
             }
-            console.log('closed');
         }
     }
 }
