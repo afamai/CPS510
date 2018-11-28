@@ -1,39 +1,39 @@
 var express = require('express');
+var fs = require('fs');
+var mustache = require('mustache');
+var dateFormat = require('dateformat');
+var db = require('../../services/employees');
 var router = express.Router();
 
-var contact = require('../../services/contact')
+var contact = require('../../services/employees')
 
-//required for post?
-var bodyParser = require('body-parser');
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({
-    extended: true
-}));
-// router.use(express.json());
-// router.use(express.urlencoded());
-
-router.get('/profile', function (req, res) {
-    res.sendFile('profile.html', { root: __dirname })
-});
-
-
-router.post('/profile', function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-
-    //create model for new contact
-    var newContact = contact.model;
-    newContact.address = req.body.address;
-    newContact.phone = req.body.phone;
-    newContact.email = req.body.email;
-    //insert new contact
-    contact.insertContact(newContact);
-
-    var loginQuery;
-    // 'INSERT INTO Login (EmployeeID, Password, lastlogin) VALUES (1, '5f4dcc3b5aa765d61d8327deb882cf99', TO_DATE('2018-11-02 09:34:33', 'YYYY-MM-DD HH24:MI:SS'));'
-    // result = oracle.runSql();
-    // res.write('<h1>' + conQuery + '</h1><br>');
-    // res.write('<h1>' + empQuery + '</h1>');
-    res.end();
+router.get('/profile/:id', function (req, res) {
+    db.getProfile(req.params.id, function(employee, contact){
+        var view = {
+            firstname: employee.FIRSTNAME,
+            lastname: employee.LASTNAME,
+            birth: dateFormat(employee.DATEOFBIRTH, "yyyy-mm-dd"),
+            position: employee.ROLE,
+            address: contact.ADDRESS,
+            phone: contact.PHONE,
+            email: contact.EMAIL,
+            managerid: employee.MANAGERID,
+            gender: employee.SEX,
+            isMale: function() {
+                return this.gender == 'M';
+            },
+            isFemale: function() {
+                return this.gender == 'F';
+            },
+            isOther: function(){
+                return this.gender == 'O';
+            }
+        };
+        console.log(view);
+        var html = fs.readFileSync("./public/profile/profile.html", 'utf8');
+        var output = mustache.render(html, view);
+        res.send(output);
+    });
 });
 
 module.exports = router

@@ -1,29 +1,59 @@
-<form action="/profile" method="POST">
-    <label for="user">Name:</label>
-    <input type="text" name="firstname" >
-    <label for="lastname">Last Name</label>
-    <input type="text" name="lastname" >
-    <br>
-    <label for="address">Address</label>
-    <input type="text" name="address" >
-    <label for="phone">Phone number</label>
-    <input type="text" name="phone" >
-    <label for="email">Email:</label>
-    <input type="text" name="email">
-    <br>
-    <label for="birth">Date Of Birth</label>
-    <input name="birth" type="date" min="1900-01-01" max="2005-01-01" step="1">
-    <br>
-    <label for="sex">Sex</label><br>
-    <input type="radio" name="sex" value="M"> Male <br>
-    <input type="radio" name="sex" value="F"> Female <br>
-    <input type="radio" name="sex" value="O"> Other <br>
-    <br>
-    <label for="role">Role</label>
-    <input type="text" name="role">
-    <br>
-    <label for="managerid">ManagerID:</label>
-    <input type="text" name='managerid'>
-    <br>
-    <button type="submit">Add Employee</button>
-</form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="/employees/employees.js"></script>
+        <title>Employees Management</title>
+    </head>
+    <body>
+        <div class="container">
+            <h2>{{firstname}} {{lastname}}</h2>
+            <form id='profile' action="/employees/add" method="POST">
+                <table>
+                    <tr>
+                        <td><label for="firstname">First Name</label></td>
+                        <td><input type="text" name="firstname" placeholder="First Name" value={{firstname}}></td>
+                    </tr>
+                    <tr>
+                        <td><label for="lastname">Last Name</label></td>
+                        <td><input type="text" name="lastname" placeholder="Last Name" value={{lastname}}></td>
+                    </tr>
+                    <tr>
+                        <td><label for="birth">Date Of Birth</label></td>
+                        <td><input name="birth" type="date" min="1900-01-01" max="2005-01-01" step="1" value={{birth}}></td>
+                    </tr>
+                    <tr>
+                        <td><label for="sex">Gender</label></td>
+                        <td>
+                            <input type="radio" name="sex" value="M" {{#isMale}}checked{{/isMale}}> Male 
+                            <input type="radio" name="sex" value="F" {{#isFemale}}checked{{/isFemale}}> Female
+                            <input type="radio" name="sex" value="O" {{#isOther}}checked{{/isOther}}> Other
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="phone">Phone number</label></td>
+                        <td><input type="text" name="phone" value={{phone}}></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email</label></td>
+                        <td><input type="text" name="email" value={{email}}></td>
+                    </tr>
+                    <tr>
+                        <td><label for="address">Address</label></td>
+                        <td><input type="text" name="address" value='{{address}}'></td>
+                    </tr>
+                    <tr>
+                        <td><label for="role">Role</label></td>
+                        <td><input type="text" name="role" value={{position}}></td>
+                    </tr>
+                    <tr>
+                        <td><label for="managerid">ManagerID</label></td>
+                        <td><input type="text" name='managerid' value={{managerid}}></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>
