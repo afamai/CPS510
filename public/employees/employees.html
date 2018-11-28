@@ -17,6 +17,7 @@
                     <th scope="col">First</th>
                     <th scope="col">Last</th> 
                     <th scope="col">Position</th>
+                    <th>Action</th>
                 </thead>
                 {{#employees}}
                 <tr>
@@ -24,6 +25,7 @@
                     <td>{{FIRSTNAME}}</td>
                     <td>{{LASTNAME}}</td>
                     <td>{{ROLE}}</td>
+                    <td><a href=/profile/{{ID}}>Edit</a></td>
                 </tr>
                 {{/employees}}
             </table>
