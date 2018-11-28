@@ -18,11 +18,34 @@ router.get('/inventory', function (req, res) {
     });
 });
 
+router.get('/item/:id', function(req, res){
+    ven.getVendors(function (vendors) {
+        db.getItem(req.params.id, function(item){
+            var view = item.rows[0];
+            view['vendors'] = vendors.rows;
+            view.vendors.forEach(function(vendor){
+                if(vendor.ID == view.VENDORID){
+                    vendor.sel = true;
+                }
+            })
+            var html = fs.readFileSync("./public/inventory/item.html", 'utf8');
+            var output = mustache.render(html, view);
+            res.write(output);
+            res.end();
+        });
+    });
+});
+
 router.post('/item/add', function (req, res) {
-    console.log(req.body);
     db.addItem(req.body, function(){
         res.redirect('/inventory');
     })
+});
+
+router.post('/item/update', function(req, res){
+    db.updateItem(req.body, function(){
+        res.redirect('/item/'+req.body.id);
+    });
 });
 
 module.exports = router

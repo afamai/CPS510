@@ -20,6 +20,25 @@ module.exports = {
                 callback(result);
             })
         })
+    },
+    getItem: async function(id, callback){
+        var sql = "select * from item where id=" + id;
+        oracle.open().then(function(conn){
+            oracle.runSql(sql, conn).then(function(result){
+                oracle.close(conn);
+                callback(result);
+            });
+        });
+    },
+    updateItem: async function(item, callback){
+        var sqlTemp = "UPDATE item SET name='%s', price=%f, quantity=%d, vendorid=%d WHERE id=%d"
+        oracle.open().then(function(conn){
+            sql = util.format(sqlTemp, item.name, item.price, item.quantity, item.vendorid, item.id);
+            oracle.runSql(sql, conn).then(function(){
+                oracle.close(conn);
+                callback();
+            });
+        })
     }
 
 }

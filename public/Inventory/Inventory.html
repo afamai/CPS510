@@ -27,7 +27,7 @@
                     <td>{{COMPANYNAME}}</td>
                     <td>{{PRICE}}</td>
                     <td>{{QUANTITY}}</td>
-                    <td><a href=#>Edit</a></td>
+                    <td><a href='/item/{{ID}}'>Edit</a></td>
                 {{/items}}
             </table>
         </div>
@@ -57,7 +57,7 @@
                                         <select name="vendor">
                                             <option value="" selected disabled hidden>-- Select a vendor --</option>
                                             {{#vendors}}
-                                            <option value={{ID}}>{{COMPANYNAME}}</option>
+                                            <option value={{ID}} {{#sel}}selected{{/sel}}>{{COMPANYNAME}}</option>
                                             {{/vendors}}
                                         </select>
                                     </td>

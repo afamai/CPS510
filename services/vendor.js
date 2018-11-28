@@ -30,7 +30,7 @@ module.exports = {
         });
     },
     updateVendor: async function(vendor, callback){
-        var sqlTemp = "UPDATE vendor SET companyname=%s WHERE id=%d"
+        var sqlTemp = "UPDATE vendor SET companyname='%s' WHERE id=%d"
         oracle.open().then(function(conn){
             var sql = util.format(sqlTemp, vendor.companyname, vendor.id);
             oracle.runSql(sql, conn).then(function(){
