@@ -24,7 +24,6 @@ router.get('/vendor/profile/:id', function(req, res) {
     });
 });
 router.post('/vendor/profile/update', function(req, res) {
-    console.log(req.body);
     db.updateVendor(req.body, function(){
         res.redirect('/vendor/profile/'+req.body.id);
     })
