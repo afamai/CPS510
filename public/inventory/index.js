@@ -42,10 +42,31 @@ router.post('/item/add', function (req, res) {
     })
 });
 
+
 router.post('/item/update', function(req, res){
     db.updateItem(req.body, function(){
         res.redirect('/item/'+req.body.id);
     });
 });
+
+
+// updating quantity
+router.post('/item/order', function(req, res){
+
+    db.getItem(req.body.id, function(item) {
+        // Update item quantity
+        var quantity;
+        req.body.quantity == '' ? quantity = '0':  quantity = req.body.quantity ;
+        var itemFetched = item.rows[0];
+
+        var item = {};
+        item.quantity = parseInt(quantity)+itemFetched.QUANTITY;
+        item.id = req.body.id;
+        db.updateItem(item, function(){});
+    });
+    
+    res.redirect('/inventory');
+});
+
 
 module.exports = router

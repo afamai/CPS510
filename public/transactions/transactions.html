@@ -1,4 +1,4 @@
-<form action="/transactions" method="POST"></form>
+<!-- <form action="/transactions" method="POST"></form>
 <label for="timestamp">Timestamp:</label>
 <input type="text" name="timestamp" id="">
 <br>
@@ -20,4 +20,47 @@
 <input type="text" name="total" id="">
 <br>
 <button type="submit">Add Transaction</button>
-</form>
+</form> -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="/home/home.js"></script>
+    <title>HOME</title>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/">Back</a>
+        <h2>Transactions</h2>
+        <table class="table">
+            <thead>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Vendor</th>
+                <th scope="col">Price($)</th>
+                <th scope="col">Quantity</th>
+                <th>Action</th>
+            </thead>
+            {{#items}}
+            <tr>
+                <td>{{ID}}</td>
+                <td>{{NAME}}</td>
+                <td>{{COMPANYNAME}}</td>
+                <td>{{PRICE}}</td>
+                <td>{{QUANTITY}}</td>
+                <td><a href='/item/{{ID}}'>Edit</a></td>
+            </tr>
+            {{/items}}
+        </table>
+    </div>
+</body>
+
+</html>

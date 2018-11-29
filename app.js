@@ -15,5 +15,6 @@ app.use(require('./public/home'));
 app.use(require('./public/profile'));
 app.use(require('./public/inventory'));
 app.use(require('./public/vendor'));
+app.use(require('./public/transactions'));
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
