@@ -34,8 +34,17 @@ router.post('/sales/add', function(req, res) {
 
     db.getItem(req.body.items[0].itemid, function (item) {
         var item = item.rows[0];
+        var totalQuantity = 0;
+        console.log('============')
+        console.log(req.body.items)
+        for (itemzzz in req.body.items) {
+            totalQuantity += parseInt(req.body.items[itemzzz].quantity);
+            
+        }
+        console.log('============')
+        console.log(totalQuantity)
         var saleObj = {
-            quantity: item.QUANTITY - req.body.items[0].quantity,
+            quantity: item.QUANTITY - totalQuantity,
             id : req.body.items[0].itemid
         }
         db.updateItem(saleObj, function() {
