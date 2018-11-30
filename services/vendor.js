@@ -1,13 +1,24 @@
 var oracle = require('./oracle.js');
 var contact = require('./contact');
 var util = require('util');
+var client = require('./client');
 module.exports = {
     addVendor: async function (vendor, callback) {
         //create sql
         var sqlTemp = "INSERT INTO vendor(id, companyname, contactid) VALUES (vendor_id_seq.nextval, '%s', %d)";
         contact.addContact(vendor.address, vendor.phone, vendor.email, function (contactid, conn) {
             let sql = util.format(sqlTemp, vendor.companyname, contactid);
-            oracle.runSql(sql, conn);
+            oracle.runSql(sql, conn).then(function(result) {
+                var getVendorId = oracle.runSql('select vendor_id_seq.currval from DUAL', conn);
+                getVendorId.then(function(r){
+                    client.addClientID(r.rows[0].CURRVAL, "vendor", conn);
+                    if(callback){
+                        callback();
+                    } else {
+                        oracle.close(conn);
+                    }
+                });
+            });;
             callback();
         });
     },

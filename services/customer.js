@@ -1,6 +1,7 @@
 var oracle = require('./oracle.js');
 var contact = require('./contact.js');
 var util = require('util');
+var client = require('./client')
 module.exports = {
     
     addCustomer: async function(customer, callback){
@@ -10,9 +11,17 @@ VALUES (customer_id_seq.nextval, '%s', '%s',0, %d)"
         contact.addContact(customer.address, customer.phone, customer.email, function(contactid, conn){
             var sql = util.format(sqlTemp, customer.firstname, customer.lastname, contactid);
             var query = oracle.runSql(sql, conn);
-            query.then(function(result){
-                oracle.close(conn);
-                callback();
+            query.then(function(){
+                //Customer ID for client creation
+                var getCustomerId = oracle.runSql('select customer_id_seq.currval from DUAL', conn);
+                getCustomerId.then(function(r){
+                    client.addClientID(r.rows[0].CURRVAL, "customer", conn);
+                    if(callback){
+                        callback();
+                    } else {
+                        oracle.close(conn);
+                    }
+                });
             })
         });
     },

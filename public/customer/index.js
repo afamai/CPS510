@@ -4,6 +4,7 @@ var fs = require('fs');
 var db = require('../../services/customer');
 var router = express.Router();
 
+// load page
 router.get('/customers', function(req, res) {
     db.getCustomers(function(result){
         view = { customers:result }
@@ -30,7 +31,7 @@ router.get('/customers/profile/:id', function(req, res) {
 });
 router.post('/customers/profile/update', function(req, res) {
     console.log(req.body);
-    db.updateCustomer(req.body, function(){
+    db.updateCustomer(req.body, function(result){
         res.redirect('/customers/profile/'+req.body.id);
     })
 });

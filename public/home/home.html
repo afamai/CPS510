@@ -1,26 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="/home/home.js"></script>
-        <title>HOME</title>
-    </head>
-    <body>
-        <div class="container">
-            <h2>Home</h2>
-            <div class="row">
-                    <div id="employee" class="col-sm-4 card" onclick='window.location = "/employees"'>Employeee Management</div>
-                    <div id="vendor" class="col-sm-4 card" onclick='window.location = "/vendor"'>Vendors</div>
-                    <div id="item" class="col-sm-4 card" onclick='window.location = "/inventory"'>Inventory Managerment</div>
-<<<<<<< HEAD
-                    <div id="transaction" class="col-sm-4 card" onclick='window.location = "/transactions"'>Transactions</div>
-=======
-                    <div id="transaction" class="col-sm-4 card" onclick=''>Transactions</div>
-                    <div id="customers" class="col-sm-4 card" onclick='window.location= "/customers"'>Customers</div>
->>>>>>> 9651ebd15e9e4681640432321148cd1c09dac5a9
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- <script src="/home/home.js"></script> -->
+    <title>HOME</title>
+    <script>
+        //Hide login button if cookies for id/firstname/lastname found
+        $(document).ready(function () {
+            var CookieGet = $.cookie('firstname');
+            if (CookieGet != null) {
+                $('#loginBtn').hide();
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Home {{FIRSTNAME}} {{LASTNAME}} {{EMPLOYEEID}}</h2>
+        <button type="button" class="btn btn-primary" id="loginBtn" data-toggle="modal" data-target="#login">login</button>
+        <button type="button" class="btn btn-primary" onclick='window.location = "/logout"'>logout</button>
+        <div class="row">
+            <div id="employee" class="col-sm-4 card" onclick='window.location = "/employees"'>Employeee Management</div>
+            <div id="vendor" class="col-sm-4 card" onclick='window.location = "/vendor"'>Vendors</div>
+            <div id="item" class="col-sm-4 card" onclick='window.location = "/inventory"'>Inventory Managerment</div>
+            <div id="transaction" class="col-sm-4 card" onclick='window.location = "/transactions"'>Transactions</div>
+            <div id="customers" class="col-sm-4 card" onclick='window.location= "/customers"'>Customers</div>
+        </div>
+    </div>
+    <div id="login" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm" action="/login" method="POST">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="email">Email</label>
+                                </td>
+                                <td>
+                                    <input type="email" name="email">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="password">Password</label>
+                                </td>
+                                <td>
+                                    <input type="Password" name="password">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="$('#loginForm').submit();">Login</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>

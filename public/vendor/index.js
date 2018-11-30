@@ -2,7 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var mustache = require('mustache');
 var router = express.Router();
-var db = require('../../services/vendor')
+var db = require('../../services/vendor');
 
 router.get('/vendor', function(req, res) {
     let view;
