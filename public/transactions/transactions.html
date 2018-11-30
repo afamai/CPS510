@@ -7,7 +7,7 @@
         crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <script src="/home/home.js"></script>
+    <script src="/transactions/transactions.js"></script>
     <title>HOME</title>
 </head>
 
@@ -15,6 +15,7 @@
     <div class="container">
         <a href="/">Back</a>
         <h2>Transactions</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSale">Add Sale</button>
         <table class="table">
             <thead>
                 <th scope="col">Time</th>
@@ -31,6 +32,65 @@
             </tr>
             {{/transactions}}
         </table>
+        <div id="addSale" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Sale</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id='saleForm' action="/sales/add" method="POST">
+                            <input id="sale" name="items" type="hidden">
+                            <input id="price" name="price" type="hidden" value=0>
+                            <table>
+                                <tr>
+                                    <td><label>Item</label>
+                                    <td>
+                                        <select id="item">
+                                            <option value="" selected disabled hidden>-- Select a item --</option>
+                                            {{#items}}
+                                            <option value={{ID}} data-price={{PRICE}}>{{NAME}}</option>
+                                            {{/items}}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Customer</label>
+                                    <td>
+                                        <select name="customerid">
+                                            <option value="" selected disabled hidden>-- Select a customer --</option>
+                                            {{#customers}}
+                                            <option value={{ID}}>{{FIRSTNAME}} {{LASTNAME}} ({{ID}})</option>
+                                            {{/customers}}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Quantity</label></td>
+                                    <td><input id="quantity" type="number"></td>
+                                    <td><button id="addItemBtn" type="button" class="btn btn-primary">Add</button></td>
+                                </tr>
+                            </table>
+                        </form>
+                        <div>
+                            <table id="itemTable" class="table">
+                                <thead>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                </thead>
+                            </table>                       
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="$('#saleForm').submit();">Add</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

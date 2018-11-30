@@ -29,16 +29,20 @@ function getDateTime() {
 
 
 module.exports = {
-    addTransaction: async function (item, empID, paymenttype, type, conn, callback) {
+    addTransaction: async function (clientid, price, empID, paymenttype, type, conn, callback) {
         //create sql
         var sqlTemp = "INSERT INTO transactions (id, timestamp, employeeid, clientid, paymenttype, type, total) VALUES\
          (transaction_id_seq.nextval, TO_DATE('%s', 'YYYY-MM-DD-HH24-MI-SS'), %d, %d, '%s', '%s', %d)";
         
         //get CLIENT ID from VENDOR
-        var cliSQL = "SELECT cli.id FROM clients cli WHERE cli.vendorid = '" + item.vendor + "'";
+        if(type == 'ORDER'){
+            var cliSQL = "SELECT cli.id FROM clients cli WHERE cli.vendorid = '" + clientid + "'";
+        } else {
+            var cliSQL = "SELECT cli.id FROM clients cli WHERE cli.customerid = '" + clientid + "'";
+        }
         oracle.runSql(cliSQL, conn).then(function(result){
             //sql for transaction
-            let sql = util.format(sqlTemp, getDateTime(), empID, result.rows[0].ID, paymenttype, type, Math.round(item.quantity * item.price *100)/100);  
+            let sql = util.format(sqlTemp, getDateTime(), empID, result.rows[0].ID, paymenttype, type, price);  
             oracle.runSql(sql, conn).then(function() {
                 //get transactionid for callback
                 var getTransactionId = oracle.runSql("select transaction_id_seq.currval from DUAL", conn);
