@@ -4,7 +4,8 @@ var mustache = require('mustache');
 var fs = require('fs');
 var db = require('../../services/item');
 var ven = require('../../services/vendor');
-var trans = require('../../services/transactions');
+var ord = require('../../services/order');
+
 
 router.get('/inventory', function (req, res) {
     let view;
@@ -53,18 +54,30 @@ router.post('/item/update', function (req, res) {
 
 // updating quantity
 router.post('/item/order', function (req, res) {
-
     db.getItem(req.body.id, function (item) {
         // Update item quantity
-        var quantity;
-        req.body.quantity == '' ? quantity = '0' : quantity = req.body.quantity;
-        var itemFetched = item.rows[0];
+        var orderQuantity;
+        var item = item.rows[0];
+        console.log(item);
+        req.body.quantity == '' ? orderQuantity = 0 : orderQuantity = parseInt(req.body.quantity);
 
-        var item = {};
-        item.quantity = parseInt(quantity) + itemFetched.QUANTITY;
-        item.id = req.body.id;
-        db.updateItem(item, function () { });
+        var order = {};
+        order.quantity = orderQuantity + item.QUANTITY;
+        order.id = req.body.id;
+
+        db.updateItem(order, function () {
+
+            order.quantity = orderQuantity;
+            order.vendor = item.VENDORID;
+            order.price = item.PRICE;
+
+            ord.newOrder(order, req.cookies.id,  function() {
+
+            });
+        });
     });
+
+
 
     res.redirect('/inventory');
 });

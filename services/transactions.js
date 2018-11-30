@@ -37,10 +37,15 @@ module.exports = {
         //get CLIENT ID from VENDOR
         var cliSQL = "SELECT cli.id FROM clients cli WHERE cli.vendorid = '" + item.vendor + "'";
         oracle.runSql(cliSQL, conn).then(function(result){
-            let sql = util.format(sqlTemp, getDateTime(), empID, result.rows[0].ID, paymenttype, type, Math.round(item.quantity * item.price *100)/100);
-            console.log(sql);
+            //sql for transaction
+            let sql = util.format(sqlTemp, getDateTime(), empID, result.rows[0].ID, paymenttype, type, Math.round(item.quantity * item.price *100)/100);  
             oracle.runSql(sql, conn).then(function() {
-                callback();
+                //get transactionid for callback
+                var getTransactionId = oracle.runSql("select transaction_id_seq.currval from DUAL", conn);
+                getTransactionId.then(function(r){
+                    transactionid = r.rows[0].CURRVAL;
+                    callback(transactionid);
+                });
             });
         });
 

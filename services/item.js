@@ -42,7 +42,7 @@ module.exports = {
             } else {
                 sql = util.format(sqlTemp, item.name, item.price, item.quantity, item.vendorid, item.id);
             }
-            console.log(sql)
+            // console.log(sql)
             oracle.runSql(sql, conn).then(function () {
                 oracle.close(conn);
                 callback();
