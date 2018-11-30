@@ -52,7 +52,7 @@ router.post('/item/update', function (req, res) {
 });
 
 
-// updating quantity
+// ORDER
 router.post('/item/order', function (req, res) {
     db.getItem(req.body.id, function (item) {
         // Update item quantity

@@ -3,8 +3,9 @@ var router = express.Router();
 var fs = require('fs');
 var mustache = require('mustache');
 var trans = require('../../services/transactions');
-var item= require('../../services/item');
-var sale= require('../../services/sale');
+var item = require('../../services/item');
+var sale = require('../../services/sale');
+var db = require('../../services/item');
 var cusomter = require('../../services/customer');
 
 router.get('/transactions', function(req, res) {
@@ -22,13 +23,31 @@ router.get('/transactions', function(req, res) {
     })
 });
 
+
+
 router.post('/sales/add', function(req, res) {
     items = JSON.parse(req.body.items);
     req.body.items = items;
     console.log(req.body)
-    sale.newSales(req.cookies.id, req.body, function(){
-        res.redirect('/transactions');
+
+    
+
+    db.getItem(req.body.items[0].itemid, function (item) {
+        var item = item.rows[0];
+        var saleObj = {
+            quantity: item.QUANTITY - req.body.items[0].quantity,
+            id : req.body.items[0].itemid
+        }
+        db.updateItem(saleObj, function() {
+            sale.newSales(req.cookies.id, req.body, function(){
+                res.redirect('/transactions');
+            });
+        });
+    
     });
+
+    
+    
 });
 
 module.exports = router
